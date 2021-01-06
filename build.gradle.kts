@@ -1,5 +1,9 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     kotlin("jvm") version "1.4.21"
+    kotlin("plugin.serialization") version "1.4.21"
+
     id("com.github.johnrengelman.shadow") version "4.0.4"
 }
 
@@ -13,10 +17,13 @@ allprojects {
         mavenCentral()
         maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots") }
         maven { url = uri("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") }
+        maven { url = uri("https://libraries.minecraft.net/") }
     }
 
     dependencies {
         implementation(kotlin("stdlib"))
+        implementation(group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version = "1.0.1")
+        compileOnly(group = "com.mojang", name = "authlib", version = "1.5.21")
         compileOnly(group = "org.spigotmc", name = "spigot-api", version = "1.8.8-R0.1-SNAPSHOT")
         compileOnly(group = "org.bukkit", name = "bukkit", version = "1.8.8-R0.1-SNAPSHOT")
         compileOnly(group = "net.md-5", name = "bungeecord-api", version = "1.16-R0.3")
@@ -25,6 +32,7 @@ allprojects {
 
 dependencies {
     implementation(project(":api"))
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 tasks {
