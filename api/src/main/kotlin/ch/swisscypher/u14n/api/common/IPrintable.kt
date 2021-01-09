@@ -4,5 +4,5 @@ interface IPrintable<T> {
     val name: String
     val value: T
 
-    fun format(): String
+    fun format(language: ILanguage): String
 }
