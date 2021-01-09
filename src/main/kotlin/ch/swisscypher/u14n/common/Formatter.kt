@@ -3,8 +3,6 @@ package ch.swisscypher.u14n.common
 import ch.swisscypher.u14n.api.common.IFormatter
 import ch.swisscypher.u14n.api.common.ILanguage
 import ch.swisscypher.u14n.api.common.IPrintable
-import ch.swisscypher.u14n.api.common.printable.*
-import java.util.*
 
 object Formatter: IFormatter {
     val prefix = "{"
