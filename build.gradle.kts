@@ -5,6 +5,7 @@ plugins {
     kotlin("plugin.serialization") version "1.4.21"
 
     id("com.github.johnrengelman.shadow") version "4.0.4"
+    id("net.minecrell.licenser") version "0.4.1"
 }
 
 group = "ch.swisscypher.u14n"
@@ -12,6 +13,7 @@ version = "0.1-SNAPSHOT"
 
 allprojects {
     apply(plugin = "kotlin")
+    apply(plugin = "net.minecrell.licenser")
 
     repositories {
         mavenCentral()
@@ -27,6 +29,19 @@ allprojects {
         compileOnly(group = "org.spigotmc", name = "spigot-api", version = "1.8.8-R0.1-SNAPSHOT")
         compileOnly(group = "org.bukkit", name = "bukkit", version = "1.8.8-R0.1-SNAPSHOT")
         compileOnly(group = "net.md-5", name = "bungeecord-api", version = "1.16-R0.3")
+    }
+
+    license {
+        header = rootProject.file("HEADER")
+        include("**/*.kt")
+
+        newLine = true
+    }
+
+    tasks {
+        jar {
+            from("../LICENSE")
+        }
     }
 }
 
