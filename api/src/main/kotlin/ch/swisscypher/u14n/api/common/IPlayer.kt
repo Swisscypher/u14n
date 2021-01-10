@@ -22,5 +22,5 @@ interface IPlayer {
     val uniqueId: UUID
     var language: ILanguage
 
-    fun sendMessage(key: String, vararg args: IPrintable<*>)
+    fun getString(key: String, vararg args: IPrintable<*>): String
 }
