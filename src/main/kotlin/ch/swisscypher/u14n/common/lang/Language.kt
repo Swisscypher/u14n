@@ -16,7 +16,7 @@
 
 package ch.swisscypher.u14n.common.lang
 
-import ch.swisscypher.u14n.api.common.ILanguage
+import ch.swisscypher.u14n.api.common.lang.ILanguage
 import java.util.*
 import kotlin.collections.HashSet
 
