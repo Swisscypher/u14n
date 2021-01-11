@@ -14,16 +14,10 @@
  * limitations under the License.
  */
 
-package ch.swisscypher.u14n.api.common.printable
+package ch.swisscypher.u14n.api.common.formatter.printable
 
-import ch.swisscypher.u14n.api.common.ILanguage
-import ch.swisscypher.u14n.api.common.IPrintable
+import ch.swisscypher.u14n.api.common.lang.ILanguage
 import java.text.DateFormat
-import java.time.Instant
-import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 import java.util.*
 
 class PrintableShortDate(override val name: String, override val value: Date) : IPrintable<Date> {
