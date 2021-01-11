@@ -1,13 +1,11 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
+    `maven-publish`
+
     kotlin("jvm") version "1.4.21"
     kotlin("plugin.serialization") version "1.4.21"
 
     id("com.github.johnrengelman.shadow") version "4.0.4"
     id("net.minecrell.licenser") version "0.4.1"
-
-    `maven-publish`
 }
 
 group = "ch.swisscypher.u14n"
@@ -75,6 +73,13 @@ publishing {
                 username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")
             }
+        }
+    }
+
+    publications {
+        create<MavenPublication>("default") {
+            from(components["java"])
+            // Include any other artifacts here, like javadocs
         }
     }
 }
