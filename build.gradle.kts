@@ -6,6 +6,8 @@ plugins {
 
     id("com.github.johnrengelman.shadow") version "4.0.4"
     id("net.minecrell.licenser") version "0.4.1"
+
+    `maven-publish`
 }
 
 group = "ch.swisscypher.u14n"
@@ -60,6 +62,19 @@ tasks {
             include("plugin.yml")
             include("bungee.yml")
             expand(project.properties)
+        }
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/swisscypher/u14n")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
         }
     }
 }
