@@ -25,18 +25,19 @@ allprojects {
     fun determineVersion(): String {
         val byteOut = ByteArrayOutputStream()
         project.exec {
-            commandLine("git", "describe", "--tags", "--first-parent")
+            commandLine("git", "describe", "--tags", "--first-parent", "--always")
             standardOutput = byteOut
         }
+        val version = String(byteOut.toByteArray()).replace("\\s".toRegex(), "").replace("^v".toRegex(), "")
         try {
             project.exec {
                 commandLine("git", "diff", "--exit-code", "--quiet")
             }
         } catch (e: Exception) {
-            return String(byteOut.toByteArray()).replace("\\s".toRegex(), "") + ".dirty"
+            return "$version.dirty"
         }
 
-        return String(byteOut.toByteArray()).replace("\\s".toRegex(), "")
+        return version
     }
 
     version = determineVersion()
