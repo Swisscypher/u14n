@@ -2,7 +2,7 @@ plugins {
     `maven-publish`
 }
 
-group = "ch.swisscypher.u14n.api"
+group = "ch.swisscypher.u14n"
 
 publishing {
     repositories {
