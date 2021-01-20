@@ -1,3 +1,5 @@
+import java.io.ByteArrayOutputStream
+
 plugins {
 
     kotlin("jvm") version "1.4.21"
@@ -5,13 +7,9 @@ plugins {
 
     id("com.github.johnrengelman.shadow") version "4.0.4"
     id("net.minecrell.licenser") version "0.4.1"
-    id("com.palantir.git-version") version "0.12.3"
 }
 
 group = "ch.swisscypher.u14n"
-
-val gitVersion: groovy.lang.Closure<String> by extra
-version = gitVersion()
 
 allprojects {
     apply(plugin = "kotlin")
@@ -24,7 +22,24 @@ allprojects {
         maven { url = uri("https://libraries.minecraft.net/") }
     }
 
-    version = gitVersion()
+    fun determineVersion(): String {
+        val byteOut = ByteArrayOutputStream()
+        project.exec {
+            commandLine("git", "describe", "--tags", "--first-parent")
+            standardOutput = byteOut
+        }
+        try {
+            project.exec {
+                commandLine("git", "diff", "--exit-code", "--quiet")
+            }
+        } catch (e: Exception) {
+            return String(byteOut.toByteArray()) + ".dirty"
+        }
+
+        return String(byteOut.toByteArray())
+    }
+
+    version = determineVersion()
 
     dependencies {
         implementation(kotlin("stdlib"))
