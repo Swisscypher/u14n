@@ -33,10 +33,10 @@ allprojects {
                 commandLine("git", "diff", "--exit-code", "--quiet")
             }
         } catch (e: Exception) {
-            return String(byteOut.toByteArray()) + ".dirty"
+            return String(byteOut.toByteArray()).replace("\\s".toRegex(), "") + ".dirty"
         }
 
-        return String(byteOut.toByteArray())
+        return String(byteOut.toByteArray()).replace("\\s".toRegex(), "")
     }
 
     version = determineVersion()
