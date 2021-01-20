@@ -1,16 +1,16 @@
 # This workflow will build a package using Gradle and then publish it to GitHub packages when a release is created
 # For more information see: https://github.com/actions/setup-java#publishing-using-gradle
 
-name: Publish plugin jar
+name: Publish API plugin jar
 
 on:
   push:
-    branches:
-    - feature/publish-jar-action
+    tags:
+    - v*
 
 jobs:
   build:
-
+    if: github.event.base_ref == 'refs/heads/feature/publish-jar-action' # TODO change to master
     runs-on: ubuntu-latest
 
     steps:
