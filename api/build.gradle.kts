@@ -4,6 +4,14 @@ plugins {
 
 group = "ch.swisscypher.u14n"
 
+
+tasks {
+    jar {
+        archiveBaseName.set(parent?.name)
+        archiveAppendix.set("api")
+    }
+}
+
 publishing {
     repositories {
         maven {

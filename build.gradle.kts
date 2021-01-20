@@ -7,9 +7,11 @@ plugins {
 
     id("com.github.johnrengelman.shadow") version "4.0.4"
     id("net.minecrell.licenser") version "0.4.1"
+    id("com.github.breadmoirai.github-release") version "2.2.12"
 }
 
 group = "ch.swisscypher.u14n"
+//name = "plugin"
 
 allprojects {
     apply(plugin = "kotlin")
@@ -82,4 +84,11 @@ tasks {
             expand(project.properties)
         }
     }
+
+    githubRelease {
+        token(System.getenv("GITHUB_TOKEN"))
+        owner("swisscypher")
+        releaseAssets(jar.get().archiveFile)
+    }
 }
+
