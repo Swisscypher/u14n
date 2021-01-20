@@ -1,0 +1,4 @@
+main: ch.swisscypher.u14n.spigot.Main
+name: ${name}
+version: ${version}
+author: SwissCypher
