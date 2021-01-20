@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    #if: github.event.base_ref == 'refs/heads/feature/publish-jar-action' # TODO change to master
+    #if: github.event.base_ref == 'refs/heads/master' # TODO activate line !
     runs-on: ubuntu-latest
 
     steps:

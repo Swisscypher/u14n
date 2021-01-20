@@ -5,10 +5,13 @@ plugins {
 
     id("com.github.johnrengelman.shadow") version "4.0.4"
     id("net.minecrell.licenser") version "0.4.1"
+    id("com.palantir.git-version") version "0.12.3"
 }
 
 group = "ch.swisscypher.u14n"
-version = "0.1-SNAPSHOT"
+
+val gitVersion: groovy.lang.Closure<String> by extra
+version = gitVersion()
 
 allprojects {
     apply(plugin = "kotlin")
@@ -20,6 +23,8 @@ allprojects {
         maven { url = uri("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") }
         maven { url = uri("https://libraries.minecraft.net/") }
     }
+
+    version = gitVersion()
 
     dependencies {
         implementation(kotlin("stdlib"))
