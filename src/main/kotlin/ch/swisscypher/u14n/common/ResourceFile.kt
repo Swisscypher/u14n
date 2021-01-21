@@ -29,11 +29,11 @@ object ResourceFile {
     fun init(pluginDir: File) {
         this.pluginDir = pluginDir
 
-        createOrGetFile(languages, "/config/languages.json")
-        createOrGetFile(config, "/config/config.json")
+        createOrGetFileFromResourcePath(languages, "/config/languages.json")
+        createOrGetFileFromResourcePath(config, "/config/config.json")
     }
 
-    private fun createOrGetFile(file: File, resourcePath: String) {
+    private fun createOrGetFileFromResourcePath(file: File, resourcePath: String) {
         if(file.exists())
             return
 

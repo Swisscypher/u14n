@@ -14,19 +14,13 @@
  * limitations under the License.
  */
 
-package ch.swisscypher.u14n.common
+package ch.swisscypher.u14n.api.spigot
 
-import ch.swisscypher.u14n.api.common.formatter.IFormatter
 import ch.swisscypher.u14n.api.common.lang.ILanguage
-import ch.swisscypher.u14n.api.common.formatter.printable.IPrintable
+import org.bukkit.plugin.java.JavaPlugin
+import java.io.InputStream
 
-object Formatter: IFormatter {
-    val prefix = "{"
-    val suffix = "}"
-
-    override fun format(language: ILanguage, message: String, vararg printables: IPrintable<*>): String {
-        return printables.fold(message, {
-            acc, iPrintable -> acc.replace(prefix + iPrintable.name + suffix, iPrintable.format(language))
-        })
-    }
+interface IPluginManager {
+    fun registerPlugin(plugin: JavaPlugin)
+    fun registerFile(plugin: JavaPlugin, input: InputStream, lang: ILanguage)
 }

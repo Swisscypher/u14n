@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-package ch.swisscypher.u14n.api.common
+package ch.swisscypher.u14n.api.common.formatter.printable
 
-interface IFormatter {
-    fun format(language: ILanguage, message: String, vararg printables: IPrintable<*>): String
+import ch.swisscypher.u14n.api.common.lang.ILanguage
+
+class PrintableString(override val name: String, override val value: String) : IPrintable<String> {
+    override fun format(language: ILanguage): String = value
 }

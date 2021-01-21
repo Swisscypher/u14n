@@ -48,7 +48,6 @@ class Main: JavaPlugin {
         ResourceFile.init(dataFolder)
 
 
-
         println(languages)
     }
 }

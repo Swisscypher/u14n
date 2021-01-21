@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package ch.swisscypher.u14n.api.common.printable
+package ch.swisscypher.u14n.api.common.formatter.printable
 
-import ch.swisscypher.u14n.api.common.ILanguage
-import ch.swisscypher.u14n.api.common.IPrintable
+import ch.swisscypher.u14n.api.common.lang.ILanguage
 
-class PrintableDouble(override val name: String, override val value: Double, private val precision: Int = 2) : IPrintable<Double> {
+class PrintableDouble(override val name: String, override val value: Double, private val precision: Int = 2) :
+    IPrintable<Double> {
     override fun format(language: ILanguage): String = String.format("%.${precision}f", value)
 }
 
@@ -27,7 +27,8 @@ class PrintableShort(override val name: String, override val value: Short) : IPr
     override fun format(language: ILanguage): String = value.toString()
 }
 
-class PrintableFloat(override val name: String, override val value: Float, private val precision: Int = 2) : IPrintable<Float> {
+class PrintableFloat(override val name: String, override val value: Float, private val precision: Int = 2) :
+    IPrintable<Float> {
     override fun format(language: ILanguage): String = String.format("%.${precision}f", value)
 }
 
