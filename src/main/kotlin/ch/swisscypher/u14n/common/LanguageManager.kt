@@ -31,7 +31,7 @@ class LanguageManager(val language: ILanguage) {
     }
 
     fun getEntry(key: String): String {
-        return values[key] ?: "{$key}"
+        return values[key] ?: "{{$key}}"
     }
 }
 
