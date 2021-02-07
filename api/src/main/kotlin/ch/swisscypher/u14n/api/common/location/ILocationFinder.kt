@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package ch.swisscypher.u14n.api.common.storage
+package ch.swisscypher.u14n.api.common.location
 
-import ch.swisscypher.u14n.api.common.IPlayer
+import ch.swisscypher.u14n.api.common.ICountry
+import java.net.InetAddress
 import java.util.*
 
-interface IStoragePlayer {
-    fun getPlayer(uuid: UUID): Optional<IPlayer>
-
-    fun savePlayer(player: IPlayer)
+interface ILocationFinder {
+    fun findLocale(address: InetAddress): Optional<ICountry>
 }
