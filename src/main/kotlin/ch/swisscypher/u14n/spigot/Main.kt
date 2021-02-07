@@ -46,8 +46,5 @@ class Main: JavaPlugin {
     override fun onEnable() {
         logger.info("Starting ${description.name} v${description.version}...")
         ResourceFile.init(dataFolder)
-
-
-        println(languages)
     }
 }

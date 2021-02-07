@@ -20,5 +20,5 @@ import ch.swisscypher.u14n.api.common.formatter.printable.IPrintable
 import ch.swisscypher.u14n.api.common.lang.ILanguage
 
 interface IFormatter {
-    fun format(language: ILanguage, message: String, vararg printables: IPrintable<*>): String
+    fun format(language: ILanguage, prefix: String = "{", suffix: String = "}", message: String, vararg printables: IPrintable<*>): String
 }

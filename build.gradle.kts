@@ -1,7 +1,6 @@
 import java.io.ByteArrayOutputStream
 
 plugins {
-
     kotlin("jvm") version "1.4.21"
     kotlin("plugin.serialization") version "1.4.21"
 
@@ -11,7 +10,6 @@ plugins {
 }
 
 group = "ch.swisscypher.u14n"
-//name = "plugin"
 
 allprojects {
     apply(plugin = "kotlin")

@@ -16,11 +16,14 @@
 
 package ch.swisscypher.u14n.api.spigot
 
+import ch.swisscypher.u14n.api.common.lang.ILanguageManager
 import ch.swisscypher.u14n.api.common.lang.ILanguage
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.InputStream
+import java.util.*
 
 interface IPluginManager {
     fun registerPlugin(plugin: JavaPlugin)
     fun registerFile(plugin: JavaPlugin, input: InputStream, lang: ILanguage)
+    fun getLangManager(plugin: JavaPlugin, lang: ILanguage): Optional<ILanguageManager>
 }
