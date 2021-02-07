@@ -14,11 +14,15 @@
  * limitations under the License.
  */
 
-package ch.swisscypher.u14n.api.common
+package ch.swisscypher.u14n.api.spigot.formatter.printable
 
-interface IPrintable<T> {
-    val name: String
-    val value: T
+import ch.swisscypher.u14n.api.common.lang.ILanguage
+import ch.swisscypher.u14n.api.common.formatter.printable.IPrintable
+import org.bukkit.entity.Player
 
-    fun format(language: ILanguage): String
+/**
+ * Spigot player formatter
+ */
+class PrintablePlayer(override val name: String, override val value: Player) : IPrintable<Player> {
+    override fun format(language: ILanguage): String = value.name
 }

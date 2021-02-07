@@ -14,12 +14,22 @@
  * limitations under the License.
  */
 
-package ch.swisscypher.u14n.api.spigot.printable
+package ch.swisscypher.u14n.common
 
-import ch.swisscypher.u14n.api.common.ILanguage
-import ch.swisscypher.u14n.api.common.IPrintable
-import org.bukkit.entity.Player
+import ch.swisscypher.u14n.api.common.lang.Entry
+import ch.swisscypher.u14n.api.common.lang.ILanguageManager
+import ch.swisscypher.u14n.api.common.lang.ILanguage
 
-class PrintablePlayer(override val name: String, override val value: Player) : IPrintable<Player> {
-    override fun format(language: ILanguage): String = value.name
+class LanguageManager(val language: ILanguage): ILanguageManager {
+    private val values: MutableMap<String, String> = HashMap()
+
+    override fun registerEntry(e: Entry) {
+        values[e.key] = e.value
+    }
+
+    override fun getEntry(key: String): String {
+        return values[key] ?: "{{$key}}"
+    }
 }
+
+

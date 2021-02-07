@@ -1,9 +1,9 @@
 plugins {
     `maven-publish`
+    kotlin("plugin.serialization")
 }
 
 group = "ch.swisscypher.u14n"
-
 
 tasks {
     jar {

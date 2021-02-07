@@ -16,15 +16,22 @@
 
 package ch.swisscypher.u14n.common
 
-import ch.swisscypher.u14n.api.common.formatter.IFormatter
 import ch.swisscypher.u14n.api.common.lang.ILanguage
-import ch.swisscypher.u14n.api.common.formatter.printable.IPrintable
 
-object Formatter: IFormatter {
+class LanguageFormatter(val pluginName: String, val prefix: String = "{", val suffix: String = "}") {
 
-    override fun format(language: ILanguage, prefix: String, suffix: String, message: String, vararg printables: IPrintable<*>): String {
-        return printables.fold(message, {
-            acc, iPrintable -> acc.replace(prefix + iPrintable.name + suffix, iPrintable.format(language))
-        })
+    companion object {
+        fun format(pluginName: String, lang: ILanguage, key: String, prefix: String = "{", suffix: String = "}"): String {
+            val langManager = PluginManager.getLangManager(pluginName, lang)
+
+            if(!langManager.isPresent)
+                return key
+
+            return Formatter.format(lang, prefix, suffix, langManager.get().getEntry(key))
+        }
+    }
+
+    fun format(lang: ILanguage, key: String): String {
+        return format(pluginName, lang, key, prefix, suffix)
     }
 }

@@ -14,8 +14,21 @@
  * limitations under the License.
  */
 
-package ch.swisscypher.u14n.api.common
+package ch.swisscypher.u14n.api.common.lang
 
-interface IFormatter {
-    fun format(language: ILanguage, message: String, vararg printables: IPrintable<*>): String
+import java.util.*
+
+/**
+ * Represent a language
+ */
+interface ILanguage {
+    val language: String
+    val country: String
+    val parent: Optional<ILanguage>
+    val locale: Locale
+
+    /**
+     * @return The IETF code of the given language
+     */
+    fun toIETFCode(): String
 }

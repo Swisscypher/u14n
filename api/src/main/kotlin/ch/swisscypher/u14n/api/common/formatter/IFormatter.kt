@@ -14,18 +14,22 @@
  * limitations under the License.
  */
 
-package ch.swisscypher.u14n.api.common
+package ch.swisscypher.u14n.api.common.formatter
 
 import ch.swisscypher.u14n.api.common.formatter.printable.IPrintable
 import ch.swisscypher.u14n.api.common.lang.ILanguage
-import ch.swisscypher.u14n.api.common.lang.ILanguageManager
 
 /**
- * A class representing a player
+ * Fromat a message using {@link IPrintable} and the given language
  */
-interface IPlayer {
-    val uniqueId: String
-    var language: ILanguage
-
-    fun getString(key: String, pluginName: String, vararg args: IPrintable<*>): String
+interface IFormatter {
+    /**
+     * @param language The language the message is
+     * @param prefix The prefix of the tokens
+     * @param suffix The suffix of the tokens
+     * @param message The raw message with tokens
+     * @param printables The custom values we need to change inside the message
+     * @return The string formatter using all the printables
+     */
+    fun format(language: ILanguage, prefix: String = "{", suffix: String = "}", message: String, vararg printables: IPrintable<*>): String
 }

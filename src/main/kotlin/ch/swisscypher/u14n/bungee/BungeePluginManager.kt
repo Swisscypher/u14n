@@ -17,36 +17,23 @@
 package ch.swisscypher.u14n.bungee
 
 import ch.swisscypher.u14n.api.bungee.IPluginManager
+import ch.swisscypher.u14n.api.common.lang.ILanguageManager
 import ch.swisscypher.u14n.api.common.lang.ILanguage
 import ch.swisscypher.u14n.common.PluginManager
-import ch.swisscypher.u14n.common.ResourceFile
-import ch.swisscypher.u14n.common.storage.StoragePlayer
-import net.md_5.bungee.api.ProxyServer
 import net.md_5.bungee.api.plugin.Plugin
-import net.md_5.bungee.api.plugin.PluginDescription
-import java.io.File
+import java.io.InputStream
 import java.util.*
 
-class Main: Plugin {
-
-    companion object {
-        lateinit var instance: Main
+object BungeePluginManager: IPluginManager {
+    override fun registerPlugin(plugin: Plugin, defaultLanguage: ILanguage) {
+        PluginManager.registerPlugin(plugin.description.name, defaultLanguage)
     }
 
-    constructor() : super() {
-        instance = this
+    override fun registerFile(plugin: Plugin, input: InputStream, lang: ILanguage) {
+        PluginManager.registerFile(plugin.description.name, input, lang)
     }
 
-    constructor(proxy: ProxyServer, description: PluginDescription) : super(proxy, description) {
-        instance = this
-    }
-
-    override fun onEnable() {
-        logger.info("Starting ${description.name} v${description.version}...")
-        ResourceFile.init(dataFolder)
-        StoragePlayer.init(File(dataFolder, "player"))
-        PluginManager.init(File(dataFolder, "language"))
-
-
+    override fun getLangManager(plugin: Plugin, lang: ILanguage): Optional<ILanguageManager> {
+        return PluginManager.getLangManager(plugin.description.name, lang)
     }
 }

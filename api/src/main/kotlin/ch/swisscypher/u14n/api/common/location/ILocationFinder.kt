@@ -14,15 +14,24 @@
  * limitations under the License.
  */
 
-package ch.swisscypher.u14n.api.common
+package ch.swisscypher.u14n.api.common.location
 
+import ch.swisscypher.u14n.api.bungee.IPluginManager
+import ch.swisscypher.u14n.api.common.ICountry
+import java.net.InetAddress
 import java.util.*
 
-interface ILanguage {
-    val language: String
-    val country: String
-    val parent: Optional<ILanguage>
-    val locale: Locale
+/**
+ * A class representing a service providing the country of a given IP
+ */
+interface ILocationFinder {
+    /**
+     * @param address The IP address we want to know the country
+     * @return The IP address country
+     */
+    fun findLocale(address: InetAddress): Optional<ICountry>
 
-    fun toIETFCode(): String
+    companion object {
+        val locationFinder = ServiceLoader.load(ILocationFinder::class.java).findFirst().get()
+    }
 }

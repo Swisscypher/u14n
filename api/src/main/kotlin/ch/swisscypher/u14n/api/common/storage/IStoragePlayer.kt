@@ -14,17 +14,27 @@
  * limitations under the License.
  */
 
-package ch.swisscypher.u14n.common
+package ch.swisscypher.u14n.api.common.storage
 
-import ch.swisscypher.u14n.api.common.formatter.IFormatter
-import ch.swisscypher.u14n.api.common.lang.ILanguage
-import ch.swisscypher.u14n.api.common.formatter.printable.IPrintable
+import ch.swisscypher.u14n.api.common.IPlayer
+import ch.swisscypher.u14n.api.common.location.ILocationFinder
+import java.util.*
 
-object Formatter: IFormatter {
+/**
+ * A class representing a player stored
+ */
+interface IStoragePlayer {
+    /**
+     * Retrieve a player based on its UUID
+     */
+    fun getPlayer(uuid: UUID): Optional<IPlayer>
 
-    override fun format(language: ILanguage, prefix: String, suffix: String, message: String, vararg printables: IPrintable<*>): String {
-        return printables.fold(message, {
-            acc, iPrintable -> acc.replace(prefix + iPrintable.name + suffix, iPrintable.format(language))
-        })
+    /**
+     * Save a given player
+     */
+    fun savePlayer(player: IPlayer)
+
+    companion object {
+        val jsonStoragePlayer = ServiceLoader.load(IStoragePlayer::class.java).findFirst().get()
     }
 }
