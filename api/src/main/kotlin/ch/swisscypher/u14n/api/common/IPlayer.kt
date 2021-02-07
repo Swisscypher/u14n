@@ -20,6 +20,9 @@ import ch.swisscypher.u14n.api.common.formatter.printable.IPrintable
 import ch.swisscypher.u14n.api.common.lang.ILanguage
 import ch.swisscypher.u14n.api.common.lang.ILanguageManager
 
+/**
+ * A class representing a player
+ */
 interface IPlayer {
     val uniqueId: String
     var language: ILanguage

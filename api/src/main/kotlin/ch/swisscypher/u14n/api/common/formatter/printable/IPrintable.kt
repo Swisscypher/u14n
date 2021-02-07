@@ -18,9 +18,17 @@ package ch.swisscypher.u14n.api.common.formatter.printable
 
 import ch.swisscypher.u14n.api.common.lang.ILanguage
 
+/**
+ * Represent a printable value inside a string
+ */
 interface IPrintable<T> {
     val name: String
     val value: T
 
+    /**
+     * Format the value with a given language
+     * @param language The language
+     * @return The string formatted based on the language
+     */
     fun format(language: ILanguage): String
 }

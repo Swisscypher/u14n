@@ -20,9 +20,18 @@ import ch.swisscypher.u14n.api.common.IPlayer
 import ch.swisscypher.u14n.api.common.location.ILocationFinder
 import java.util.*
 
+/**
+ * A class representing a player stored
+ */
 interface IStoragePlayer {
+    /**
+     * Retrieve a player based on its UUID
+     */
     fun getPlayer(uuid: UUID): Optional<IPlayer>
 
+    /**
+     * Save a given player
+     */
     fun savePlayer(player: IPlayer)
 
     companion object {

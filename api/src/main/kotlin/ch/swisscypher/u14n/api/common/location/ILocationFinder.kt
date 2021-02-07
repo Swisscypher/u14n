@@ -21,7 +21,14 @@ import ch.swisscypher.u14n.api.common.ICountry
 import java.net.InetAddress
 import java.util.*
 
+/**
+ * A class representing a service providing the country of a given IP
+ */
 interface ILocationFinder {
+    /**
+     * @param address The IP address we want to know the country
+     * @return The IP address country
+     */
     fun findLocale(address: InetAddress): Optional<ICountry>
 
     companion object {
