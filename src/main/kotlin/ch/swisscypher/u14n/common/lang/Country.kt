@@ -16,14 +16,25 @@
 
 package ch.swisscypher.u14n.common.lang
 
+import ch.swisscypher.u14n.api.common.ICountry
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import java.util.*
 
 @Serializable
-data class Country(val countryCode: String, val languages: List<String>, val head: String = "DEFAULT"): Comparable<Country> {
+data class Country(
+    override val countryCode: String,
+    override val languages: List<String>,
+    val head: String = "DEFAULT"
+): Comparable<Country>, ICountry {
     @Contextual
     private val localeCountry = Locale("", countryCode)
+
+    companion object {
+        val countries by lazy {
+            Continent.continents.flatMap { it.countries }
+        }
+    }
 
     fun getDisplayName(locale: Locale): String {
         return localeCountry.getDisplayCountry(locale)
