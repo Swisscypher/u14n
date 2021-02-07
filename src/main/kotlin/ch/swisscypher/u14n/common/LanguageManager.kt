@@ -16,29 +16,20 @@
 
 package ch.swisscypher.u14n.common
 
+import ch.swisscypher.u14n.api.common.lang.Entry
+import ch.swisscypher.u14n.api.common.lang.ILanguageManager
 import ch.swisscypher.u14n.api.common.lang.ILanguage
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.builtins.ListSerializer
-import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonTransformingSerializer
 
-class LanguageManager(val language: ILanguage) {
+class LanguageManager(val language: ILanguage): ILanguageManager {
     private val values: MutableMap<String, String> = HashMap()
 
-    fun registerEntry(e: Entry) {
+    override fun registerEntry(e: Entry) {
         values[e.key] = e.value
     }
 
-    fun getEntry(key: String): String {
+    override fun getEntry(key: String): String {
         return values[key] ?: "{{$key}}"
     }
 }
 
-@Serializable
-data class Entry(val key: String, val value: String)
 
-object EntryListSerializer: JsonTransformingSerializer<List<Entry>>(ListSerializer(Entry.serializer())) {
-    override fun transformDeserialize(element: JsonElement): JsonElement =
-        if(element !is JsonArray) JsonArray(listOf(element)) else element
-}

@@ -16,11 +16,14 @@
 
 package ch.swisscypher.u14n.api.bungee
 
+import ch.swisscypher.u14n.api.common.lang.ILanguageManager
 import ch.swisscypher.u14n.api.common.lang.ILanguage
 import net.md_5.bungee.api.plugin.Plugin
 import java.io.InputStream
+import java.util.*
 
 interface IPluginManager {
     fun registerPlugin(plugin: Plugin)
     fun registerFile(plugin: Plugin, input: InputStream, lang: ILanguage)
+    fun getLangManager(plugin: Plugin, lang: ILanguage): Optional<ILanguageManager>
 }

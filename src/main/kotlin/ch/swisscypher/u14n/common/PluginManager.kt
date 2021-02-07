@@ -14,33 +14,34 @@
  * limitations under the License.
  */
 
-package ch.swisscypher.u14n.spigot
+package ch.swisscypher.u14n.common
 
+import ch.swisscypher.u14n.api.common.lang.EntryListSerializer
+import ch.swisscypher.u14n.api.common.lang.ILanguageManager
 import ch.swisscypher.u14n.api.common.lang.ILanguage
-import ch.swisscypher.u14n.api.spigot.IPluginManager
-import ch.swisscypher.u14n.common.EntryListSerializer
-import ch.swisscypher.u14n.common.LanguageManager
+import ch.swisscypher.u14n.bungee.Main
 import ch.swisscypher.u14n.common.exception.PluginNotRegisteredException
 import com.google.common.io.ByteStreams
 import kotlinx.serialization.json.Json
-import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
+import java.util.*
+import kotlin.collections.HashMap
 
-object PluginManager: IPluginManager {
+object PluginManager {
     private val languageDir: File = File(Main.instance.dataFolder, "language")
-    private val fileRegistered: MutableMap<JavaPlugin, MutableMap<ILanguage, LanguageManager>> = HashMap()
+    private val fileRegistered: MutableMap<String, MutableMap<ILanguage, ILanguageManager>> = HashMap()
 
-    override fun registerPlugin(plugin: JavaPlugin) {
-        fileRegistered[plugin] = HashMap()
+    fun registerPlugin(pluginName: String) {
+        fileRegistered[pluginName] = HashMap()
     }
 
-    override fun registerFile(plugin: JavaPlugin, input: InputStream, lang: ILanguage) {
-        if(!fileRegistered.containsKey(plugin))
+    fun registerFile(pluginName: String, input: InputStream, lang: ILanguage) {
+        if(!fileRegistered.containsKey(pluginName))
             throw PluginNotRegisteredException()
 
-        val d = File(languageDir, plugin.name)
+        val d = File(languageDir, pluginName)
         val f = File(d, "${lang.toIETFCode()}.json")
 
         if(!f.exists()) {
@@ -56,6 +57,16 @@ object PluginManager: IPluginManager {
             lm.registerEntry(it)
         }
 
-        fileRegistered[plugin]!![lang] = lm
+        fileRegistered[pluginName]!![lang] = lm
+    }
+
+    fun getLangManager(pluginName: String, lang: ILanguage): Optional<ILanguageManager> {
+        if(!fileRegistered.containsKey(pluginName))
+            return Optional.empty()
+
+        if(!fileRegistered[pluginName]!!.containsKey(lang))
+            return Optional.empty()
+
+        return Optional.of(fileRegistered[pluginName]!![lang]!!)
     }
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ch.swisscypher.u14n.api.spigot.printable
+package ch.swisscypher.u14n.api.spigot.formatter.printable
 
 import ch.swisscypher.u14n.api.common.lang.ILanguage
 import ch.swisscypher.u14n.api.common.formatter.printable.IPrintable
