@@ -23,13 +23,13 @@ import kotlin.collections.HashMap
 
 class RAMStoragePlayer: IStoragePlayer {
 
-    private val players: HashMap<UUID, IPlayer> = HashMap()
+    private val players: HashMap<String, IPlayer> = HashMap()
 
     override fun getPlayer(uuid: UUID): Optional<IPlayer> {
-        if(!players.containsKey(uuid))
+        if(!players.containsKey(uuid.toString()))
             return Optional.empty()
 
-        return Optional.ofNullable(players[uuid])
+        return Optional.ofNullable(players[uuid.toString()])
     }
 
     override fun savePlayer(player: IPlayer) {

@@ -16,10 +16,15 @@
 
 package ch.swisscypher.u14n.api.common.location
 
+import ch.swisscypher.u14n.api.bungee.IPluginManager
 import ch.swisscypher.u14n.api.common.ICountry
 import java.net.InetAddress
 import java.util.*
 
 interface ILocationFinder {
     fun findLocale(address: InetAddress): Optional<ICountry>
+
+    companion object {
+        val locationFinder = ServiceLoader.load(ILocationFinder::class.java).findFirst().get()
+    }
 }

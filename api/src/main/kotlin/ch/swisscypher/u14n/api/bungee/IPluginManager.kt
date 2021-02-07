@@ -26,4 +26,8 @@ interface IPluginManager {
     fun registerPlugin(plugin: Plugin)
     fun registerFile(plugin: Plugin, input: InputStream, lang: ILanguage)
     fun getLangManager(plugin: Plugin, lang: ILanguage): Optional<ILanguageManager>
+
+    companion object {
+        val pluginManger = ServiceLoader.load(IPluginManager::class.java).findFirst().get()
+    }
 }
