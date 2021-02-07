@@ -16,7 +16,17 @@
 
 package ch.swisscypher.u14n.api.common
 
+/**
+ * A class representing a country
+ */
 interface ICountry {
+    /**
+     * The country code
+     */
     val countryCode: String
+
+    /**
+     * A list of available languages in that country
+     */
     val languages: List<String>
 }

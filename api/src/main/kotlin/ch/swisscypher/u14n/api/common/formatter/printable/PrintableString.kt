@@ -18,6 +18,9 @@ package ch.swisscypher.u14n.api.common.formatter.printable
 
 import ch.swisscypher.u14n.api.common.lang.ILanguage
 
+/**
+ * String formatter
+ */
 class PrintableString(override val name: String, override val value: String) : IPrintable<String> {
     override fun format(language: ILanguage): String = value
 }

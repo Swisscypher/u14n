@@ -22,8 +22,26 @@ import net.md_5.bungee.api.plugin.Plugin
 import java.io.InputStream
 import java.util.*
 
+/**
+ * Class you can use to register your bungee plugin and your language files
+ */
 interface IPluginManager {
+    /**
+     * @param plugin The plugin you are actually developing
+     */
     fun registerPlugin(plugin: Plugin)
+
+    /**
+     * @param plugin The plugin you are actually developing
+     * @param input The input stream of the file
+     * @param lang The language of the file
+     */
     fun registerFile(plugin: Plugin, input: InputStream, lang: ILanguage)
+
+    /**
+     * @param plugin The plugin you are actually developing
+     * @param lang The language you want the manager
+     * @return The {@link ch.swisscypher.u14n.api.common.lang.ILanguageManager} of the given plugin and language (empty if doesn't exist)
+     */
     fun getLangManager(plugin: Plugin, lang: ILanguage): Optional<ILanguageManager>
 }

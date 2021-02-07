@@ -20,6 +20,9 @@ import ch.swisscypher.u14n.api.common.lang.ILanguage
 import ch.swisscypher.u14n.api.common.formatter.printable.IPrintable
 import org.bukkit.entity.Player
 
+/**
+ * Spigot player formatter
+ */
 class PrintablePlayer(override val name: String, override val value: Player) : IPrintable<Player> {
     override fun format(language: ILanguage): String = value.name
 }

@@ -20,20 +20,32 @@ import ch.swisscypher.u14n.api.common.lang.ILanguage
 import java.text.DateFormat
 import java.util.*
 
+/**
+ * Short date formatter
+ */
 class PrintableShortDate(override val name: String, override val value: Date) : IPrintable<Date> {
     override fun format(language: ILanguage): String
             = DateFormat.getDateInstance(DateFormat.SHORT, language.locale).format(value)
 }
 
+/**
+ * Long date formatter
+ */
 class PrintableLongDate(override val name: String, override val value: Date) : IPrintable<Date> {
     override fun format(language: ILanguage): String
             = DateFormat.getDateInstance(DateFormat.LONG, language.locale).format(value)
 }
 
-class PrintableLongDateTime(override val name: String, override val value: Date) : IPrintable<Date> {
-    override fun format(language: ILanguage): String = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, language.locale).format(value)
-}
-
+/**
+ * Short date time formatter
+ */
 class PrintableShortDateTime(override val name: String, override val value: Date) : IPrintable<Date> {
     override fun format(language: ILanguage): String = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, language.locale).format(value)
+}
+
+/**
+ * Long date time formatter
+ */
+class PrintableLongDateTime(override val name: String, override val value: Date) : IPrintable<Date> {
+    override fun format(language: ILanguage): String = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, language.locale).format(value)
 }

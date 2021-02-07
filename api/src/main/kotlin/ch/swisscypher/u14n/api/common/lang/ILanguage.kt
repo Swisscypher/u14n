@@ -18,11 +18,17 @@ package ch.swisscypher.u14n.api.common.lang
 
 import java.util.*
 
+/**
+ * Represent a language
+ */
 interface ILanguage {
     val language: String
     val country: String
     val parent: Optional<ILanguage>
     val locale: Locale
 
+    /**
+     * @return The IETF code of the given language
+     */
     fun toIETFCode(): String
 }
