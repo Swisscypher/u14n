@@ -19,13 +19,26 @@ package ch.swisscypher.u14n.common.player
 import ch.swisscypher.u14n.api.common.IPlayer
 import ch.swisscypher.u14n.api.common.formatter.printable.IPrintable
 import ch.swisscypher.u14n.api.common.lang.ILanguage
-import ch.swisscypher.u14n.api.common.lang.ILanguageManager
 import ch.swisscypher.u14n.common.Formatter
+import ch.swisscypher.u14n.common.PluginManager
+import ch.swisscypher.u14n.common.config.config
+import ch.swisscypher.u14n.common.lang.Language
 import kotlinx.serialization.Serializable
+import java.util.*
 
 @Serializable
 data class U14nPlayer(override val uniqueId: String, override var language: ILanguage) : IPlayer {
-    override fun getString(key: String, languageManager: ILanguageManager, vararg args: IPrintable<*>): String {
-        return Formatter.format(language, "{", "}", languageManager.getEntry(key), *args)
+    override fun getString(key: String, pluginName: String, vararg args: IPrintable<*>): String {
+        val optional = Language.findBestLanguage(
+            language,
+            Language(Locale.forLanguageTag(config.`default-language`)),
+            PluginManager.getDefaultLanguage(pluginName).get(),
+            PluginManager.getSupportedLanguages(pluginName)
+        )
+
+        if(optional.isEmpty)
+            return key
+
+        return Formatter.format(optional.get(), "{", "}", PluginManager.getLangManager(pluginName, optional.get()).get().getEntry(key), *args)
     }
 }

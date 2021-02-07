@@ -29,8 +29,9 @@ import java.util.*
 interface IPluginManager {
     /**
      * @param plugin The plugin you are actually developing
+     * @param defaultLanguage The default language
      */
-    fun registerPlugin(plugin: JavaPlugin)
+    fun registerPlugin(plugin: JavaPlugin, defaultLanguage: ILanguage)
 
     /**
      * @param plugin The plugin you are actually developing

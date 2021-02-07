@@ -55,7 +55,7 @@ class Language(
             playerLanguage: ILanguage,
             configDefaultLanguage: ILanguage,
             pluginDefaultLanguage: ILanguage,
-            supportedLanguages: HashSet<ILanguage>
+            supportedLanguages: Set<ILanguage>
         ): Optional<ILanguage> {
             if(supportedLanguages.contains(playerLanguage))
                 return Optional.of(playerLanguage)

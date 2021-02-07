@@ -32,13 +32,15 @@ import kotlin.collections.HashMap
 object PluginManager {
     private lateinit var languageDir: File
     private val fileRegistered: MutableMap<String, MutableMap<ILanguage, ILanguageManager>> = HashMap()
+    private val defaultLanguages: MutableMap<String, ILanguage> = HashMap()
 
     fun init(languageDir: File) {
         this.languageDir = languageDir
     }
 
-    fun registerPlugin(pluginName: String) {
+    fun registerPlugin(pluginName: String, defaultLanguage: ILanguage) {
         fileRegistered[pluginName] = HashMap()
+        defaultLanguages[pluginName] = defaultLanguage
     }
 
     fun registerFile(pluginName: String, input: InputStream, lang: ILanguage) {
@@ -68,9 +70,17 @@ object PluginManager {
         if(!fileRegistered.containsKey(pluginName))
             return Optional.empty()
 
-        if(!fileRegistered[pluginName]!!.containsKey(lang))
-            return Optional.empty()
+        return Optional.ofNullable(fileRegistered[pluginName]!![lang])
+    }
 
-        return Optional.of(fileRegistered[pluginName]!![lang]!!)
+    fun getDefaultLanguage(pluginName: String): Optional<ILanguage> {
+        return Optional.ofNullable(defaultLanguages[pluginName])
+    }
+
+    fun getSupportedLanguages(pluginName: String): Set<ILanguage> {
+        if(!fileRegistered.containsKey(pluginName))
+            return setOf()
+
+        return fileRegistered[pluginName]!!.keys
     }
 }

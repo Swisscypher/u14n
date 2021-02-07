@@ -27,5 +27,5 @@ interface IPlayer {
     val uniqueId: String
     var language: ILanguage
 
-    fun getString(key: String, languageManager: ILanguageManager, vararg args: IPrintable<*>): String
+    fun getString(key: String, pluginName: String, vararg args: IPrintable<*>): String
 }

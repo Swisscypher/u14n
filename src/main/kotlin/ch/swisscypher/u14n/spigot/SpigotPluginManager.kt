@@ -26,8 +26,8 @@ import java.io.InputStream
 import java.util.*
 
 object SpigotPluginManager: IPluginManager {
-    override fun registerPlugin(plugin: JavaPlugin) {
-        PluginManager.registerPlugin(plugin.description.name)
+    override fun registerPlugin(plugin: JavaPlugin, defaultLanguage: ILanguage) {
+        PluginManager.registerPlugin(plugin.description.name, defaultLanguage)
     }
 
     override fun registerFile(plugin: JavaPlugin, input: InputStream, lang: ILanguage) {

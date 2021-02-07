@@ -28,8 +28,9 @@ import java.util.*
 interface IPluginManager {
     /**
      * @param plugin The plugin you are actually developing
+     * @param defaultLanguage The default language
      */
-    fun registerPlugin(plugin: Plugin)
+    fun registerPlugin(plugin: Plugin, defaultLanguage: ILanguage)
 
     /**
      * @param plugin The plugin you are actually developing
@@ -46,6 +47,6 @@ interface IPluginManager {
     fun getLangManager(plugin: Plugin, lang: ILanguage): Optional<ILanguageManager>
 
     companion object {
-        val pluginManger = ServiceLoader.load(IPluginManager::class.java).findFirst().get()
+        val pluginManager = ServiceLoader.load(IPluginManager::class.java).findFirst().get()
     }
 }

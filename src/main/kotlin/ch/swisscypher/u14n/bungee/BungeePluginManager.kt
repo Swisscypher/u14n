@@ -25,8 +25,8 @@ import java.io.InputStream
 import java.util.*
 
 object BungeePluginManager: IPluginManager {
-    override fun registerPlugin(plugin: Plugin) {
-        PluginManager.registerPlugin(plugin.description.name)
+    override fun registerPlugin(plugin: Plugin, defaultLanguage: ILanguage) {
+        PluginManager.registerPlugin(plugin.description.name, defaultLanguage)
     }
 
     override fun registerFile(plugin: Plugin, input: InputStream, lang: ILanguage) {
