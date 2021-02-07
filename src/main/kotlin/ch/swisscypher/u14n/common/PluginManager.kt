@@ -30,8 +30,12 @@ import java.util.*
 import kotlin.collections.HashMap
 
 object PluginManager {
-    private val languageDir: File = File(Main.instance.dataFolder, "language")
+    private lateinit var languageDir: File
     private val fileRegistered: MutableMap<String, MutableMap<ILanguage, ILanguageManager>> = HashMap()
+
+    fun init(languageDir: File) {
+        this.languageDir = languageDir
+    }
 
     fun registerPlugin(pluginName: String) {
         fileRegistered[pluginName] = HashMap()
