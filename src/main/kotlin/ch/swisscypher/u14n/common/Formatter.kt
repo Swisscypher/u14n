@@ -21,10 +21,8 @@ import ch.swisscypher.u14n.api.common.lang.ILanguage
 import ch.swisscypher.u14n.api.common.formatter.printable.IPrintable
 
 object Formatter: IFormatter {
-    val prefix = "{"
-    val suffix = "}"
 
-    override fun format(language: ILanguage, message: String, vararg printables: IPrintable<*>): String {
+    override fun format(language: ILanguage, prefix: String, suffix: String, message: String, vararg printables: IPrintable<*>): String {
         return printables.fold(message, {
             acc, iPrintable -> acc.replace(prefix + iPrintable.name + suffix, iPrintable.format(language))
         })
