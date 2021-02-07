@@ -18,11 +18,12 @@ package ch.swisscypher.u14n.api.common
 
 import ch.swisscypher.u14n.api.common.formatter.printable.IPrintable
 import ch.swisscypher.u14n.api.common.lang.ILanguage
+import ch.swisscypher.u14n.api.common.lang.ILanguageManager
 import java.util.*
 
 interface IPlayer {
-    val uniqueId: UUID
+    val uniqueId: String
     var language: ILanguage
 
-    fun getString(key: String, vararg args: IPrintable<*>): String
+    fun getString(key: String, languageManager: ILanguageManager, vararg args: IPrintable<*>): String
 }
