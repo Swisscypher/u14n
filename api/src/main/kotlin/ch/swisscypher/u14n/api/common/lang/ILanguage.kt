@@ -31,4 +31,11 @@ interface ILanguage {
      * @return The IETF code of the given language
      */
     fun toIETFCode(): String
+
+    companion object {
+        fun fromLocale(locale: Locale): ILanguage {
+            val lang = ClassLoader.getSystemClassLoader().loadClass("ch.swisscypher.u14n.common.lang.Language")
+            return lang.getConstructor(Locale::class.java).newInstance(locale) as ILanguage
+        }
+    }
 }
